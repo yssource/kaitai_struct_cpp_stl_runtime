@@ -167,6 +167,7 @@ bool kaitai::kstream::is_eof() const {
 }
 
 void kaitai::kstream::seek(uint64_t pos) {
+    align_to_byte();
     m_io->seekg(pos);
 }
 
@@ -191,6 +192,7 @@ uint64_t kaitai::kstream::size() {
 // ------------------------------------------------------------------------
 
 int8_t kaitai::kstream::read_s1() {
+    align_to_byte();
     char t;
     m_io->get(t);
     return t;
@@ -201,6 +203,7 @@ int8_t kaitai::kstream::read_s1() {
 // ........................................................................
 
 int16_t kaitai::kstream::read_s2be() {
+    align_to_byte();
     int16_t t;
     m_io->read(reinterpret_cast<char *>(&t), 2);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -210,6 +213,7 @@ int16_t kaitai::kstream::read_s2be() {
 }
 
 int32_t kaitai::kstream::read_s4be() {
+    align_to_byte();
     int32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -219,6 +223,7 @@ int32_t kaitai::kstream::read_s4be() {
 }
 
 int64_t kaitai::kstream::read_s8be() {
+    align_to_byte();
     int64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -232,6 +237,7 @@ int64_t kaitai::kstream::read_s8be() {
 // ........................................................................
 
 int16_t kaitai::kstream::read_s2le() {
+    align_to_byte();
     int16_t t;
     m_io->read(reinterpret_cast<char *>(&t), 2);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -241,6 +247,7 @@ int16_t kaitai::kstream::read_s2le() {
 }
 
 int32_t kaitai::kstream::read_s4le() {
+    align_to_byte();
     int32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -250,6 +257,7 @@ int32_t kaitai::kstream::read_s4le() {
 }
 
 int64_t kaitai::kstream::read_s8le() {
+    align_to_byte();
     int64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -263,6 +271,7 @@ int64_t kaitai::kstream::read_s8le() {
 // ------------------------------------------------------------------------
 
 uint8_t kaitai::kstream::read_u1() {
+    align_to_byte();
     char t;
     m_io->get(t);
     return t;
@@ -273,6 +282,7 @@ uint8_t kaitai::kstream::read_u1() {
 // ........................................................................
 
 uint16_t kaitai::kstream::read_u2be() {
+    align_to_byte();
     uint16_t t;
     m_io->read(reinterpret_cast<char *>(&t), 2);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -282,6 +292,7 @@ uint16_t kaitai::kstream::read_u2be() {
 }
 
 uint32_t kaitai::kstream::read_u4be() {
+    align_to_byte();
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -291,6 +302,7 @@ uint32_t kaitai::kstream::read_u4be() {
 }
 
 uint64_t kaitai::kstream::read_u8be() {
+    align_to_byte();
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -304,6 +316,7 @@ uint64_t kaitai::kstream::read_u8be() {
 // ........................................................................
 
 uint16_t kaitai::kstream::read_u2le() {
+    align_to_byte();
     uint16_t t;
     m_io->read(reinterpret_cast<char *>(&t), 2);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -313,6 +326,7 @@ uint16_t kaitai::kstream::read_u2le() {
 }
 
 uint32_t kaitai::kstream::read_u4le() {
+    align_to_byte();
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -322,6 +336,7 @@ uint32_t kaitai::kstream::read_u4le() {
 }
 
 uint64_t kaitai::kstream::read_u8le() {
+    align_to_byte();
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -339,6 +354,7 @@ uint64_t kaitai::kstream::read_u8le() {
 // ........................................................................
 
 float kaitai::kstream::read_f4be() {
+    align_to_byte();
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -348,6 +364,7 @@ float kaitai::kstream::read_f4be() {
 }
 
 double kaitai::kstream::read_f8be() {
+    align_to_byte();
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -361,6 +378,7 @@ double kaitai::kstream::read_f8be() {
 // ........................................................................
 
 float kaitai::kstream::read_f4le() {
+    align_to_byte();
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -370,6 +388,7 @@ float kaitai::kstream::read_f4le() {
 }
 
 double kaitai::kstream::read_f8le() {
+    align_to_byte();
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -469,6 +488,7 @@ uint64_t kaitai::kstream::read_bits_int_le(int n) {
 // ========================================================================
 
 std::string kaitai::kstream::read_bytes(std::streamsize len) {
+    align_to_byte();
     std::vector<char> result(len);
 
     // NOTE: streamsize type is signed, negative values are only *supposed* to not be used.
@@ -485,6 +505,7 @@ std::string kaitai::kstream::read_bytes(std::streamsize len) {
 }
 
 std::string kaitai::kstream::read_bytes_full() {
+    align_to_byte();
     std::istream::pos_type p1 = m_io->tellg();
     m_io->seekg(0, std::istream::end);
     std::istream::pos_type p2 = m_io->tellg();
@@ -501,6 +522,7 @@ std::string kaitai::kstream::read_bytes_full() {
 }
 
 std::string kaitai::kstream::read_bytes_term(char term, bool include, bool consume, bool eos_error) {
+    align_to_byte();
     std::string result;
     std::getline(*m_io, result, term);
     if (m_io->eof()) {
@@ -519,6 +541,7 @@ std::string kaitai::kstream::read_bytes_term(char term, bool include, bool consu
 }
 
 std::string kaitai::kstream::read_bytes_term_multi(std::string term, bool include, bool consume, bool eos_error) {
+    align_to_byte();
     std::size_t term_len = term.length();
     if (term_len > static_cast<std::size_t>(std::numeric_limits<std::streamsize>::max())) {
         throw std::runtime_error("read_bytes_term_multi: terminator too long");
